@@ -5,6 +5,7 @@ document
 
     const formData = new FormData(e.target);
     const data = {
+      timestamp: new Date().toISOString(),
       name: formData.get("name"),
       email: formData.get("email"),
       country: formData.get("country"),
