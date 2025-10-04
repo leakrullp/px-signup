@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrations</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <a href="index.html">👈🏻 Click to go back to signup</a>
+    <h1 id="title">These lovely people are signed up 🏕️</h1>
+
+    <ul id="registrations-list"></ul>
+
+    <!-- Load index.js first so getCountryFlag is available -->
+    <script src="index.js"></script>
+
+    <script>
+        function getCountryFlag(country) {
+            const flags = {
+                Austria: "🇦🇹",
+                Azerbaijan: "🇦🇿",
+                Belgium: "🇧🇪",
+                Bulgaria: "🇧🇬",
+                "Czech Republic": "🇨🇿",
+                Denmark: "🇩🇰",
+                Estonia: "🇪🇪",
+                Finland: "🇫🇮",
+                France: "🇫🇷",
+                Germany: "🇩🇪",
+                Georgia: "🇬🇪",
+                Greece: "🇬🇷",
+                Hungary: "🇭🇺",
+                Italy: "🇮🇹",
+                Latvia: "🇱🇻",
+                Lithuania: "🇱🇹",
+                Moldova: "🇲🇩",
+                Netherlands: "🇳🇱",
+                Norway: "🇳🇴",
+                Poland: "🇵🇱",
+                Romania: "🇷🇴",
+                Spain: "🇪🇸",
+                Switzerland: "🇨🇭",
+                Türkiye: "🇹🇷",
+                Argentina: "🇦🇷",
+                Brazil: "🇧🇷",
+                Canada: "🇨🇦",
+                Chile: "🇨🇱",
+                Ecuador: "🇪🇨",
+                Mexico: "🇲🇽",
+                Paraguay: "🇵🇾",
+                Uruguay: "🇺🇾",
+                USA: "🇺🇸",
+                Venezuela: "🇻🇪",
+                China: "🇨🇳",
+                India: "🇮🇳",
+                Indonesia: "🇮🇩",
+                Japan: "🇯🇵",
+                Mongolia: "🇲🇳",
+                Philippines: "🇵🇭",
+                "South Korea": "🇰🇷",
+                Thailand: "🇹🇭",
+                Vietnam: "🇻🇳",
+                Ghana: "🇬🇭",
+                Liberia: "🇱🇷",
+                Namibia: "🇳🇦",
+                "South Africa": "🇿🇦",
+                Australia: "🇦🇺",
+            };
+
+            return flags[country] || ""; // fallback if not found
+        }
+        async function loadRegistrations() {
+            const res = await fetch("/registrations");
+            const registrations = await res.json();
+            console.log("Fetched registrations:", registrations);
+
+            const list = document.getElementById("registrations-list");
+            const title = document.getElementById("title");
+
+            title.textContent = `${registrations.length} lovely people are signed up! 🏕️`;
+            list.innerHTML = "";
+
+            registrations.forEach((reg) => {
+                const li = document.createElement("li");
+                li.className = "registration";
+
+                const flag = getCountryFlag(reg.country);
+
+                li.innerHTML = `
+    <div><strong>${reg.name}</strong> from <span class="country">${reg.country}</span> ${flag}
+        </div>${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}`;
+
+                list.appendChild(li);
+            });
+        }
+
+        loadRegistrations();
+    </script>
+</body>
+
+</html>
