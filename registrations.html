@@ -92,10 +92,15 @@
                     li.className = "registration";
                     const flag = getCountryFlag(reg.country);
 
+                    const nameLine = reg.country
+                        ? `<strong>${reg.name}</strong> from <span class="country">${reg.country}</span> ${flag}`
+                        : `<strong>${reg.name}</strong>`;
+
                     li.innerHTML = `
-          <div><strong>${reg.name}</strong> from <span class="country">${reg.country}</span> ${flag}</div>
-          ${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}
-        `;
+  <div>${nameLine}</div>
+  ${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}
+`;
+
                     list.appendChild(li);
                 });
             } catch (err) {
