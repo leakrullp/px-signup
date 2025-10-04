@@ -25,7 +25,7 @@
                 Azerbaijan: "🇦🇿",
                 Belgium: "🇧🇪",
                 Bulgaria: "🇧🇬",
-                "Czech Republic": "🇨🇿",
+                "Czechia": "🇨🇿",
                 Denmark: "🇩🇰",
                 Estonia: "🇪🇪",
                 Finland: "🇫🇮",
@@ -74,28 +74,36 @@
             return flags[country] || ""; // fallback if not found
         }
         async function loadRegistrations() {
-            const res = await fetch(API_URL);
-            const registrations = await res.json();
-            console.log("Fetched registrations:", registrations);
+            try {
+                const res = await fetch(API_URL);
+                const registrations = await res.json();
 
-            const list = document.getElementById("registrations-list");
-            const title = document.getElementById("title");
+                console.log("Fetched registrations:", registrations);
 
-            title.textContent = `${registrations.length} lovely people are signed up! 🏕️`;
-            list.innerHTML = "";
+                const rows = registrations;
 
-            registrations.forEach((reg) => {
-                const li = document.createElement("li");
-                li.className = "registration";
+                const title = document.getElementById("title");
+                const list = document.getElementById("registrations-list");
 
-                const flag = getCountryFlag(reg.country);
+                title.textContent = `${rows.length} lovely people are signed up! 🏕️`;
+                list.innerHTML = "";
 
-                li.innerHTML = `
-    <div><strong>${reg.name}</strong> from <span class="country">${reg.country}</span> ${flag}
-        </div>${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}`;
+                rows.forEach((reg) => {
+                    const li = document.createElement("li");
+                    li.className = "registration";
+                    const flag = getCountryFlag(reg.country);
 
-                list.appendChild(li);
-            });
+                    li.innerHTML = `
+          <div><strong>${reg.name}</strong> from <span class="country">${reg.country}</span> ${flag}</div>
+          ${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}
+        `;
+                    list.appendChild(li);
+                });
+            } catch (err) {
+                console.error("Error loading registrations:", err);
+                const title = document.getElementById("title");
+                title.textContent = "⚠️ Couldn't load registrations.";
+            }
         }
 
         loadRegistrations();
