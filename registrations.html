@@ -17,6 +17,8 @@
     <script src="index.js"></script>
 
     <script>
+        const API_URL = "https://sheetdb.io/api/v1/YOUR_SHEETDB_ID";
+
         function getCountryFlag(country) {
             const flags = {
                 Austria: "🇦🇹",
@@ -72,7 +74,7 @@
             return flags[country] || ""; // fallback if not found
         }
         async function loadRegistrations() {
-            const res = await fetch("/registrations");
+            const res = await fetch(API_URL);
             const registrations = await res.json();
             console.log("Fetched registrations:", registrations);
 
