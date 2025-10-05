@@ -16,7 +16,7 @@
     <script src="script.js"></script>
 
     <script>
-        const API_URL = "https://sheetdb.io/api/v1/evoz3raw0gqor";
+        const API_URL = "https://script.google.com/macros/s/AKfycbxaqD55Iv-a3bKLE4DMVBmcTd0E1usjZmJ45nlABJ3UOMH4FiRyaKQSpEjzeArTOnEM/exec";
 
         function getCountryFlag(country) {
             const flags = {
@@ -98,10 +98,9 @@
                         : `<strong>${reg.name}</strong>`;
 
                     li.innerHTML = `
-  <div>${nameLine}</div>
-  ${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}
-`;
-
+                        <div>${nameLine}</div>
+                        ${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}
+                    `;
                     list.appendChild(li);
                 });
             } catch (err) {

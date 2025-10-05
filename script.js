@@ -5,26 +5,27 @@ document
 
     const formData = new FormData(e.target);
     const data = {
-      timestamp: new Date().toISOString(),
       name: formData.get("name"),
       email: formData.get("email"),
       country: formData.get("country"),
       message: formData.get("message"),
+      visible: formData.get("visible") === "yes" ? "yes" : "no",
     };
 
     try {
-      const res = await fetch("https://sheetdb.io/api/v1/evoz3raw0gqor", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: [data] }),
-      });
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbxaqD55Iv-a3bKLE4DMVBmcTd0E1usjZmJ45nlABJ3UOMH4FiRyaKQSpEjzeArTOnEM/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(data).toString(),
+        }
+      );
 
-      if (res.ok) {
-        alert("✅ Registration successful!");
-        e.target.reset();
-      } else {
-        alert("❌ Error submitting registration.");
-      }
+      // ✅ Assume success, since we can’t verify in no-cors mode
+      alert("✅ Registration successful!");
+      e.target.reset();
     } catch (err) {
       console.error(err);
       alert("⚠️ Network error. Please try again later.");
