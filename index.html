@@ -9,33 +9,67 @@
 
 <body>
 
-    <a href="https://projectxworld.weebly.com">Back to PX website</a>
+    <a style="margin-bottom: 1rem;" href="https://projectxworld.weebly.com">Back to PX website</a>
     <a href="registrations.html">See who is signed up 👉</a>
 
     <h1>Sign up for Project X 2026 🇦🇹</h1>
     <h2>23-26 of July 2026 in Austria</h2>
 
     <form id="registration-form">
-        <label>
-            First name</label><br>
-        <input type="text" name="name" required><br>
+
+        <div class="form-group">
+            <label>
+                Name (whatever you go by)<span style="color:red; font-weight: 500">*</span></label>
+            <input type="text" name="fullname" required>
+        </div>
+
+        <div class="form-group">
+            <label>
+                Email address<span style="color:red; font-weight: 500">*</span></label>
+            <input type="email" name="email" required>
+
+        </div>
+
+        <div class="form-group">
+            <label>
+                Phone number (country code included)</label>
+            <input type="text" name="phone">
+        </div>
+
+        <div class="form-group">
+            <label>
+                Your connection to YFU</label>
+            <input type="text" name="connection">
+        </div>
+
+        <div class="form-group">
+            <label>
+                Where are you from?</label>
+            <input list="countries" name="country">
+
+        </div>
+
+        <div class="form-group">
+            <label>
+                Feel free to leave a sweet message for your fellow PX ambassadors ❤️</label>
+            <textarea name="message" id="long-text"></textarea>
+        </div>
 
         <label>
-            Email</label><br>
-        <input type="email" name="email" required><br>
-
-        <label>
-            Where are you from? </label><br>
-        <input list="countries" name="country"><br>
-
-        <label>
-            Feel free to leave a sweet message for your fellow PX ambassadors ❤️</label><br>
-        <textarea name="message" id="long-text"></textarea><br>
-
-        <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem;">
             <input type="checkbox" name="visible" value="yes" checked>
             I want my registration to be visible to others (name, country & message only)
-        </label><br>
+        </label>
+
+        <label>
+            <input type="checkbox" name="visible" value="yes" onclick="toggleButton()">
+            <span style="color:red; font-weight: 500">*</span>I understand that donating money is important
+            to make PX 2026 happen, however non-mandatory. I confirm that I will be over 18 years old by
+            the time I arrive to the event. I acknowledge that, if there is any suspicion of false information given
+            upon arrival, I may be required to present valid proof of identification on site in order to
+            participate in the event. I understand that I am legally reponsible for my own behaviour during the event
+            itself and any consequences thereof. I agree to let the organizing team process my personal data for the
+            purpose of organizing PX 2026, and understand that I can withdraw it at any moment.
+        </label>
 
         <datalist id="countries">
             <option value="Afghanistan">
@@ -237,7 +271,11 @@
         </datalist>
 
 
-        <button type="submit">Submit</button>
+        <button id="submit-btn" type="submit" disabled>Submit</button>
+
+        <!-- <p class="footer-text">
+            Made with love by <a href="https://github.com/leakrullp">Lea Krull</a>
+        </p> -->
     </form>
 </body>
 

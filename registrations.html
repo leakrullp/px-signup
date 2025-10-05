@@ -77,12 +77,11 @@
         async function loadRegistrations() {
             try {
                 const res = await fetch(API_URL);
-                const text = await res.text(); // get raw string
+                const text = await res.text();
                 console.log("Raw text:", text);
 
                 let registrations = text;
 
-                // 🔧 Ensure we have a real array (some Apps Scripts return double-encoded JSON)
                 try {
                     registrations = JSON.parse(registrations);
                     if (typeof registrations === "string") {
@@ -93,8 +92,6 @@
                 }
 
                 console.log("Fetched registrations:", registrations);
-
-                //const rows = registrations.reverse();
 
                 const title = document.getElementById("title");
                 const list = document.getElementById("registrations-list");
@@ -126,6 +123,12 @@
 
         loadRegistrations();
     </script>
+
+    <p class="footer-text">
+        Write to us in the <a
+            href="mailto:leakrull96@gmail.com, elias.wille@yfu.at, marlenemazal@gmx.at?subject=PX26 Registration">organizing
+            team</a> with any questions.
+    </p>
 </body>
 
 </html>

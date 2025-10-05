@@ -18,10 +18,18 @@ body {
 h1 {
   color: #2b2d42;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-size: 1.8rem;
   font-family: SwedenSans;
   font-weight: normal;
+}
+
+.footer-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 2rem;
 }
 
 h2 {
@@ -36,10 +44,10 @@ h2 {
 a {
   display: block;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   text-decoration: none;
-  color: #c9102e;
-  font-weight: 500;
+  color: #3e3ef9;
+  font-weight: 400;
 }
 
 a:hover {
@@ -50,16 +58,22 @@ form {
   background: #fff;
   padding: 1rem;
   border-radius: 12px;
-  max-width: 420px;
+  max-width: 480px;
   width: 100%;
-
   text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* stack label and input vertically */
+  gap: 0rem; /* controls the space between label and input */
+  margin-bottom: 1rem; /* space between groups */
 }
 
 label {
   display: block;
   font-weight: 400;
-  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 input[type="text"],
@@ -81,12 +95,17 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.15);
   outline: none;
 }
+textarea:focus {
+  border-color: rgba(62, 62, 249, 50);
+  box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.15);
+  outline: none;
+}
 
 button {
   display: block;
   margin: 1.5rem auto 0;
   padding: 0.75rem 2rem;
-  background: #c9102e;
+  background: #3e3ef9;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -98,7 +117,10 @@ button {
 }
 
 button:hover {
-  background: #8b0017;
+  background: #1919cd;
+}
+button:disabled {
+  background: #888888;
 }
 
 textarea {
