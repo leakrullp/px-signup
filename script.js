@@ -8,34 +8,29 @@ document
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
-      email: formData.get("phone"), //OBS
-      email: formData.get("connection"), //OBS
+      phone: formData.get("phone"),
+      connection: formData.get("connection"),
       country: formData.get("country"),
       message: formData.get("message"),
       visible: formData.get("visible") === "yes" ? "yes" : "no",
     };
 
     try {
-      const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbwTt7rCfy99b5YwDP_45GrBETa_2vWCCkgxTRMQP21MN0LCT9otgb96QNOZGfbDj8ru/exec",
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbwTt7rCfy99b5YwDP_45GrBETa_2vWCCkgxTRMQP21MN0LCT9ot/exec",
         {
           method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(data).toString(),
+          mode: "no-cors",
+          body: JSON.stringify(data),
         }
       );
 
-      const responseText = await res.text();
-
-      if (responseText.startsWith("ok")) {
-        alert("✅ Registration successful!");
-        e.target.reset();
-      } else {
-        throw new Error(responseText);
-      }
+      alert("🎉 Thanks for signing up for PX 2026!");
+      e.target.reset();
+      document.getElementById("submit-btn").disabled = true;
     } catch (err) {
+      alert("⚠️ Error submitting form. Please try again later.");
       console.error(err);
-      alert("⚠️ Error submitting registration: " + err.message);
     }
   });
 
