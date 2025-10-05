@@ -9,7 +9,7 @@
 
 <body>
     <a href="index.html">👈 Go back to signup</a>
-    <h1 id="title">These lovely people are signed up 🏕️</h1>
+    <h1 id="title">counting all participants... 🏕️</h1>
 
     <ul id="registrations-list"></ul>
 
@@ -96,7 +96,7 @@
                 const title = document.getElementById("title");
                 const list = document.getElementById("registrations-list");
 
-                title.textContent = `${registrations.length} lovely people are signed up! 🏕️`;
+                title.textContent = `${registrations.length} lovely people are signed up 🏕️`;
                 list.innerHTML = "";
 
                 registrations.forEach((reg) => {
