@@ -40,3 +40,5 @@ function toggleButton() {
 
   button.disabled = !checkbox.checked;
 }
+
+document.getElementById("phone-number").style.display = "none";
