@@ -77,11 +77,15 @@
         async function loadRegistrations() {
             try {
                 const res = await fetch(API_URL);
-                const registrations = await res.json();
+                const text = await res.text(); // get raw string
+                console.log("Raw text:", text);
 
-                // 👇 Fix: double-parse if the backend returns stringified JSON
-                if (typeof registrations === "string") {
-                    registrations = JSON.parse(registrations);
+                let registrations;
+                try {
+                    registrations = JSON.parse(text); // try parsing directly
+                } catch (err) {
+                    // if it's still stringified JSON, parse twice
+                    registrations = JSON.parse(JSON.parse(text));
                 }
 
                 console.log("Fetched registrations:", registrations);
