@@ -80,12 +80,16 @@
                 const text = await res.text(); // get raw string
                 console.log("Raw text:", text);
 
-                let registrations;
+                let registrations = text;
+
+                // 🔧 Ensure we have a real array (some Apps Scripts return double-encoded JSON)
                 try {
-                    registrations = JSON.parse(text); // try parsing directly
+                    registrations = JSON.parse(registrations);
+                    if (typeof registrations === "string") {
+                        registrations = JSON.parse(registrations);
+                    }
                 } catch (err) {
-                    // if it's still stringified JSON, parse twice
-                    registrations = JSON.parse(JSON.parse(text));
+                    console.error("Parsing error:", err);
                 }
 
                 console.log("Fetched registrations:", registrations);
@@ -95,10 +99,10 @@
                 const title = document.getElementById("title");
                 const list = document.getElementById("registrations-list");
 
-                title.textContent = `${rows.length} lovely people are signed up! 🏕️`;
+                title.textContent = `${registrations.length} lovely people are signed up! 🏕️`;
                 list.innerHTML = "";
 
-                rows.forEach((reg) => {
+                registrations.forEach((reg) => {
                     const li = document.createElement("li");
                     li.className = "registration";
                     const flag = getCountryFlag(reg.country);
