@@ -38,3 +38,9 @@ document
       alert("⚠️ Error submitting registration: " + err.message);
     }
   });
+
+function toggleButton() {
+  const button = document.getElementById("submit-btn");
+  if (button.disabled) button.disabled = false;
+  else button.disabled = true;
+}
