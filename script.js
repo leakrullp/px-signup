@@ -4,28 +4,42 @@ document
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    // const data = {
-    //   name: formData.get("name"),
-    //   email: formData.get("email"),
-    //   country: formData.get("country"),
-    //   message: formData.get("message"),
-    //   visible: formData.get("visible") === "yes" ? "yes" : "no",
-    // };
+
+    // 💡 Convert FormData to a standard JavaScript object first
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      country: formData.get("country"),
+      message: formData.get("message"),
+      // Ensure 'visible' is either 'yes' or 'no'
+      visible: formData.get("visible") === "yes" ? "yes" : "no",
+    };
 
     try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbxaqD55Iv-a3bKLE4DMVBmcTd0E1usjZmJ45nlABJ3UOMH4FiRyaKQSpEjzeArTOnEM/exec",
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbwTt7rCfy99b5YwDP_45GrBETa_2vWCCkgxTRMQP21MN0LCT9otgb96QNOZGfbDj8ru/exec",
         {
           method: "POST",
-          body: formData, // 👈 send as multipart/form-data
+          // 🔑 Use URL-encoded format, which Apps Script handles easily
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          // 🔑 Convert the data object into a URL query string
+          body: new URLSearchParams(data).toString(),
         }
       );
 
-      // ✅ Assume success, since we can’t verify in no-cors mode
-      alert("✅ Registration successful!");
-      e.target.reset();
+      // 💡 Read the response text from your doPost(e) function ("ok" or "error:...")
+      const responseText = await res.text();
+
+      if (responseText.startsWith("ok")) {
+        // ✅ Success confirmed by the server response
+        alert("✅ Registration successful!");
+        e.target.reset();
+      } else {
+        // ❌ Error confirmed by the server response
+        throw new Error(responseText);
+      }
     } catch (err) {
       console.error(err);
-      alert("⚠️ Network error. Please try again later.");
+      alert("⚠️ Error submitting registration: " + err.message);
     }
   });
