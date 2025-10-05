@@ -79,6 +79,11 @@
                 const res = await fetch(API_URL);
                 const registrations = await res.json();
 
+                // 👇 Fix: double-parse if the backend returns stringified JSON
+                if (typeof registrations === "string") {
+                    registrations = JSON.parse(registrations);
+                }
+
                 console.log("Fetched registrations:", registrations);
 
                 const rows = registrations.reverse();
