@@ -40,7 +40,8 @@ document
   });
 
 function toggleButton() {
+  const checkbox = document.querySelector('input[name="consent"]');
   const button = document.getElementById("submit-btn");
-  if (button.disabled) button.disabled = false;
-  else button.disabled = true;
+
+  button.disabled = !checkbox.checked;
 }
