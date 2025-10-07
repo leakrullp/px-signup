@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8">
@@ -9,120 +9,12 @@
 
 <body>
     <a href="index.html">👈 Go back to signup</a>
-    <h1 id="title">counting all participants... 🏕️</h1>
+    <h1 id="title">counting participants... 🧮</h1>
+    <h2 id="sub-title"></h2>
 
     <ul id="registrations-list"></ul>
 
-    <script src="script.js"></script>
-
-    <script>
-        const API_URL =
-            "https://script.google.com/macros/s/AKfycbwTt7rCfy99b5YwDP_45GrBETa_2vWCCkgxTRMQP21MN0LCT9otgb96QNOZGfbDj8ru/exec";
-
-        function getCountryFlag(country) {
-            const flags = {
-                Austria: "🇦🇹",
-                Azerbaijan: "🇦🇿",
-                Belgium: "🇧🇪",
-                Bulgaria: "🇧🇬",
-                Czechia: "🇨🇿",
-                Denmark: "🇩🇰",
-                Estonia: "🇪🇪",
-                Finland: "🇫🇮",
-                France: "🇫🇷",
-                Germany: "🇩🇪",
-                Georgia: "🇬🇪",
-                Greece: "🇬🇷",
-                Hungary: "🇭🇺",
-                Italy: "🇮🇹",
-                Latvia: "🇱🇻",
-                Lithuania: "🇱🇹",
-                Moldova: "🇲🇩",
-                Netherlands: "🇳🇱",
-                Norway: "🇳🇴",
-                Poland: "🇵🇱",
-                Romania: "🇷🇴",
-                Spain: "🇪🇸",
-                Sweden: "🇸🇪",
-                Switzerland: "🇨🇭",
-                Türkiye: "🇹🇷",
-                Argentina: "🇦🇷",
-                Brazil: "🇧🇷",
-                Canada: "🇨🇦",
-                Chile: "🇨🇱",
-                Ecuador: "🇪🇨",
-                Mexico: "🇲🇽",
-                Paraguay: "🇵🇾",
-                Uruguay: "🇺🇾",
-                USA: "🇺🇸",
-                Venezuela: "🇻🇪",
-                China: "🇨🇳",
-                India: "🇮🇳",
-                Indonesia: "🇮🇩",
-                Japan: "🇯🇵",
-                Mongolia: "🇲🇳",
-                Philippines: "🇵🇭",
-                "South Korea": "🇰🇷",
-                Thailand: "🇹🇭",
-                Vietnam: "🇻🇳",
-                Ghana: "🇬🇭",
-                Liberia: "🇱🇷",
-                Namibia: "🇳🇦",
-                "South Africa": "🇿🇦",
-                Australia: "🇦🇺",
-            };
-
-            return flags[country] || "";
-        }
-        async function loadRegistrations() {
-            try {
-                const res = await fetch(API_URL);
-                const text = await res.text();
-                console.log("Raw text:", text);
-
-                let registrations = text;
-
-                try {
-                    registrations = JSON.parse(registrations);
-                    if (typeof registrations === "string") {
-                        registrations = JSON.parse(registrations);
-                    }
-                } catch (err) {
-                    console.error("Parsing error:", err);
-                }
-
-                console.log("Fetched registrations:", registrations);
-
-                const title = document.getElementById("title");
-                const list = document.getElementById("registrations-list");
-
-                title.textContent = `${registrations.length} lovely people are signed up 🏕️`;
-                list.innerHTML = "";
-
-                registrations.forEach((reg) => {
-                    const li = document.createElement("li");
-                    li.className = "registration";
-                    const flag = getCountryFlag(reg.country);
-
-                    const nameLine = reg.country
-                        ? `<strong>${reg.name}</strong> from <span class="country">${reg.country}</span> ${flag}`
-                        : `<strong>${reg.name}</strong>`;
-
-                    li.innerHTML = `
-                        <div>${nameLine}</div>
-                        ${reg.message ? `<div class="quote">“${reg.message}”</div>` : ""}
-                    `;
-                    list.appendChild(li);
-                });
-            } catch (err) {
-                console.error("Error loading registrations:", err);
-                const title = document.getElementById("title");
-                title.textContent = "⚠️ Couldn't load registrations.";
-            }
-        }
-
-        loadRegistrations();
-    </script>
+    <script src="registrations.js"></script>
 
     <p class="footer-text">
         Write to us in the
