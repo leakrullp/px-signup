@@ -80,7 +80,7 @@ async function loadRegistrations() {
     const list = document.getElementById("registrations-list");
 
     title.innerHTML = `${data.totalCount} lovely people are signed up 🏕️`;
-    subtitle.textContent = "they include:";
+    subtitle.textContent = ""; //TODO: Add explanatory text here, if discrepancy between visible = 'yes' / 'no'
     list.innerHTML = "";
 
     registrations.forEach((reg) => {
@@ -89,7 +89,7 @@ async function loadRegistrations() {
       const flag = getCountryFlag(reg.country);
 
       const nameLine = reg.country
-        ? `<strong>${reg.name}</strong> from <span class="country">${reg.country}</span> ${flag}`
+        ? `<strong>${reg.name}</strong> from ${reg.country} ${flag}`
         : `<strong>${reg.name}</strong>`;
 
       li.innerHTML = `
