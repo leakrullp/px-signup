@@ -3,6 +3,12 @@ document
   .addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const submitBtn = document.querySelector("#submit-btn");
+    const loader = document.querySelector("#loader");
+
+    submitBtn.style.visibility = "hidden";
+    loader.style.display = "block";
+
     const formData = new FormData(e.target);
 
     const data = {
@@ -31,6 +37,9 @@ document
     } catch (err) {
       alert("⚠️ Error submitting form. Please try again later.");
       console.error(err);
+    } finally {
+      loader.style.display = "none";
+      submitBtn.style.visibility = "visible";
     }
   });
 

@@ -17,6 +17,9 @@
 
     <form id="registration-form">
 
+        <p>Fields marked with <span style="color:red; font-weight: 500">*</span> are mandatory</p>
+
+
         <div class="form-group">
             <label>
                 Name (whatever you go by)<span style="color:red; font-weight: 500">*</span></label>
@@ -271,8 +274,10 @@
             <option value="Zimbabwe">
         </datalist>
 
-
-        <button id="submit-btn" type="submit" disabled>Submit</button>
+        <div class="submit-wrapper">
+            <button id="submit-btn" type="submit" disabled>Submit</button>
+            <div class="loader" id="loader"></div>
+        </div>
 
         <!-- <p class="footer-text">
             Made with love by <a href="https://github.com/leakrullp">Lea Krull</a>

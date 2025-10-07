@@ -70,9 +70,9 @@ form {
 
 .form-group {
   display: flex;
-  flex-direction: column; /* stack label and input vertically */
-  gap: 0rem; /* controls the space between label and input */
-  margin-bottom: 1rem; /* space between groups */
+  flex-direction: column;
+  gap: 0rem;
+  margin-bottom: 1rem;
 }
 
 label {
@@ -164,6 +164,37 @@ textarea {
   border-radius: 12px;
   font-style: italic;
   margin-top: 0.75rem;
+}
+
+.submit-wrapper {
+  position: relative;
+  display: block; /* makes it a block element */
+  width: fit-content; /* shrink-wraps around the button */
+  margin: 1.5rem auto; /* centers it horizontally */
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #eb8500; /* PX orange */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 600px) {
