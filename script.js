@@ -31,7 +31,7 @@ document
         }
       );
 
-      alert("🎉 Thanks for signing up for PX 2026!");
+      alert("🎉 Thank you for signing up for PX 2026!");
       e.target.reset();
       document.getElementById("submit-btn").disabled = true;
     } catch (err) {
