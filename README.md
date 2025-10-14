@@ -12,4 +12,4 @@ The full data set we receive consists of {`name`, `email`, `connection`, `countr
 The backend is powered by a Google Apps Script, which makes sure all the data you submit automatically is entered into the data sheet,
 but the script only returns {`name`, `country`, and `message`} of those rows, where the field `visible` is set to `yes`. Your other data is not stored in the browser and is in no way visible to the public. The title of the registrations page has a number ("_XX lovely people have signed up_"), which includes all entries, regardles of yes/no status.
 
-The Google Drive folder for the organizing team of 2026 is hosted on my personal account, which _may_ have distributed hosting on servers outside the EU. I don't reuse my Google password on any other services (or in general). 
+The Google Drive folder for the organizing team of 2026 is hosted on my personal account, which _may_ have distributed hosting on servers outside the EU.
