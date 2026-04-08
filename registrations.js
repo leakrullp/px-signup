@@ -80,7 +80,7 @@ async function loadRegistrations() {
     const list = document.getElementById("registrations-list");
 
     title.innerHTML = `${data.totalCount} lovely people are signed up 🏕️`;
-    subtitle.textContent = ""; //TODO: Add explanatory text here, if discrepancy between visible = 'yes' / 'no'
+    subtitle.style.display = "none";
     list.innerHTML = "";
 
     registrations.forEach((reg) => {
