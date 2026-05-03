@@ -28,7 +28,7 @@ document
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: new URLSearchParams(data).toString(),
-        }
+        },
       );
 
       alert("🎉 Thank you for signing up for PX 2026!");
@@ -40,6 +40,8 @@ document
     } finally {
       loader.style.display = "none";
       submitBtn.style.visibility = "visible";
+      sessionStorage.removeItem("APIresponse");
+      saveDataToStorage();
     }
   });
 
@@ -50,4 +52,5 @@ function toggleButton() {
   button.disabled = !checkbox.checked;
 }
 
+saveDataToStorage();
 document.getElementById("phone-number").style.display = "none";
