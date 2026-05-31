@@ -1,6 +1,68 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbwTt7rCfy99b5YwDP_45GrBETa_2vWCCkgxTRMQP21MN0LCT9otgb96QNOZGfbDj8ru/exec";
 
+const flags = {
+  austria: "🇦🇹",
+  azerbaijan: "🇦🇿",
+  belgium: "🇧🇪",
+  bulgaria: "🇧🇬",
+  czechia: "🇨🇿",
+  denmark: "🇩🇰",
+  estonia: "🇪🇪",
+  finland: "🇫🇮",
+  france: "🇫🇷",
+  germany: "🇩🇪",
+  deutschland: "🇩🇪",
+  allemagne: "🇩🇪",
+  de: "🇩🇪",
+  georgia: "🇬🇪",
+  greece: "🇬🇷",
+  hungary: "🇭🇺",
+  magyarország: "🇭🇺",
+  italy: "🇮🇹",
+  italia: "🇮🇹",
+  ireland: "🇮🇪",
+  latvia: "🇱🇻",
+  lithuania: "🇱🇹",
+  moldova: "🇲🇩",
+  netherlands: "🇳🇱",
+  norway: "🇳🇴",
+  poland: "🇵🇱",
+  romania: "🇷🇴",
+  spain: "🇪🇸",
+  serbia: "🇷🇸",
+  sweden: "🇸🇪",
+  switzerland: "🇨🇭",
+  schweiz: "🇨🇭",
+  ch: "🇨🇭",
+  türkiye: "🇹🇷",
+  turkey: "🇹🇷",
+  argentina: "🇦🇷",
+  brazil: "🇧🇷",
+  canada: "🇨🇦",
+  chile: "🇨🇱",
+  ecuador: "🇪🇨",
+  mexico: "🇲🇽",
+  paraguay: "🇵🇾",
+  uruguay: "🇺🇾",
+  usa: "🇺🇸",
+  venezuela: "🇻🇪",
+  china: "🇨🇳",
+  india: "🇮🇳",
+  indonesia: "🇮🇩",
+  japan: "🇯🇵",
+  mongolia: "🇲🇳",
+  philippines: "🇵🇭",
+  "south Korea": "🇰🇷",
+  thailand: "🇹🇭",
+  vietnam: "🇻🇳",
+  ghana: "🇬🇭",
+  liberia: "🇱🇷",
+  namibia: "🇳🇦",
+  "south Africa": "🇿🇦",
+  australia: "🇦🇺",
+};
+
 async function saveDataToStorage() {
   if (!sessionStorage.getItem("APIresponse")) {
     try {
@@ -19,66 +81,17 @@ function getDataFromStorage() {
   return sessionStorage.getItem("APIresponse");
 }
 
-function getCountryFlag(country) {
-  const flags = {
-    Austria: "🇦🇹",
-    Azerbaijan: "🇦🇿",
-    Belgium: "🇧🇪",
-    Bulgaria: "🇧🇬",
-    Czechia: "🇨🇿",
-    Denmark: "🇩🇰",
-    Estonia: "🇪🇪",
-    Finland: "🇫🇮",
-    France: "🇫🇷",
-    Germany: "🇩🇪",
-    Deutschland: "🇩🇪",
-    Georgia: "🇬🇪",
-    Greece: "🇬🇷",
-    Hungary: "🇭🇺",
-    Magyarország: "🇭🇺",
-    Italy: "🇮🇹",
-    Italia: "🇮🇹",
-    Latvia: "🇱🇻",
-    Lithuania: "🇱🇹",
-    Moldova: "🇲🇩",
-    Netherlands: "🇳🇱",
-    Norway: "🇳🇴",
-    Poland: "🇵🇱",
-    Romania: "🇷🇴",
-    Spain: "🇪🇸",
-    Sweden: "🇸🇪",
-    Switzerland: "🇨🇭",
-    Schweiz: "🇨🇭",
-    Türkiye: "🇹🇷",
-    Turkey: "🇹🇷",
-    Argentina: "🇦🇷",
-    Brazil: "🇧🇷",
-    Canada: "🇨🇦",
-    Chile: "🇨🇱",
-    Ecuador: "🇪🇨",
-    Mexico: "🇲🇽",
-    Paraguay: "🇵🇾",
-    Uruguay: "🇺🇾",
-    USA: "🇺🇸",
-    Venezuela: "🇻🇪",
-    China: "🇨🇳",
-    India: "🇮🇳",
-    Indonesia: "🇮🇩",
-    Japan: "🇯🇵",
-    Mongolia: "🇲🇳",
-    Philippines: "🇵🇭",
-    "South Korea": "🇰🇷",
-    Thailand: "🇹🇭",
-    Vietnam: "🇻🇳",
-    Ghana: "🇬🇭",
-    Liberia: "🇱🇷",
-    Namibia: "🇳🇦",
-    "South Africa": "🇿🇦",
-    Australia: "🇦🇺",
-  };
+const getCountryFlags = (countryString) => {
+  const words = countryString
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+    .split(/\s+/);
 
-  return flags[country] || "";
-}
+  return words
+    .map((word) => flags[word])
+    .filter((flag) => flag !== undefined)
+    .join(" ");
+};
+
 // Add Event Listener to window
 window.addEventListener("load", async () => {
   if (!document.getElementById("registrations-list")) return; // not on this page
@@ -105,7 +118,9 @@ window.addEventListener("load", async () => {
     registrations.forEach((reg) => {
       const li = document.createElement("li");
       li.className = "registration";
-      const flag = getCountryFlag(reg.country);
+      const countries = reg.country;
+      const countriesSanitized = countries.toLowerCase();
+      const flag = getCountryFlags(countriesSanitized);
       const nameLine = reg.country
         ? `<strong>${reg.name}</strong> from ${reg.country} ${flag}`
         : `<strong>${reg.name}</strong>`;
